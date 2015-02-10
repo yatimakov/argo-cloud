@@ -1,8 +1,9 @@
+<div ng-include="'components/headerbar/headerbar.html'"></div>
 <div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-include="'components/menu/menu.html'"></div>
 
   <div class="container">
     <div class="row">
-      <h3>id = {{ points.navigator.id }}</h3>
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -27,8 +28,6 @@
         </table>
         <hr />
         <div ng-controller="tableCtrl as table">
-          <h3>id = {{ table.navigator.id }}</h3>
-
           <table datatable="ng" class="row-border hover">
             <thead>
             <tr>

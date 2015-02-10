@@ -54,8 +54,14 @@ angular.module('ngAgroApp', [
     return Point
   })
 
-  .service('loader', function () {
+  .service('loader', function Loader($rootScope){
     this.state = false;
+    this.loader = function(state){
+      this.state = state;
+      $rootScope.$broadcast('loader:updated', {
+        state: state
+      });
+    };
   })
 
   .run(function ($rootScope, $location, Auth) {

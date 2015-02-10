@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngAgroApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, $injector) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, loader) {
     $scope.menu = [{
       'title': 'Desktop',
       'link': '/'
@@ -12,7 +12,10 @@ angular.module('ngAgroApp')
       }
     ];
 
-    var loader = $injector.get('loader');
+    $scope.$on('loader:updated', function(event, data) {
+      $scope._isBusy = data.state;
+    });
+
     $scope._isBusy = loader.state;
 
     $scope.isCollapsed = true;

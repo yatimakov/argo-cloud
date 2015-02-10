@@ -8,11 +8,11 @@
 
 
 angular.module('ngAgroApp')
-  .controller('MainCtrl', function ($scope, $http, socket, $injector) {
+  .controller('MainCtrl', function ($scope, $http, socket, loader) {
 
-    $scope.loader = $injector.get('loader');
+    $scope.loader = loader;
 
-    $scope.loader.state = true;
+    $scope.loader.loader(false);
 
 
     var _map;
@@ -108,6 +108,8 @@ angular.module('ngAgroApp')
           }
         });
       }
+      $scope.moveToFinishTrack();
+      $scope.loader.loader(false);
 
     };
 
@@ -151,7 +153,7 @@ angular.module('ngAgroApp')
       socket.unsyncUpdates('navigator');
     });
     $scope.getTrack = function () {
-
+      $scope.loader.loader(true);
       var dateTimeFrom, dateTimeTo;
 
       dateTimeFrom = new Date($scope.dateFrom);

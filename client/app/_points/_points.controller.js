@@ -60,10 +60,6 @@ function tableCtrl($scope, $resource, navigator) {
   vm.navigator = navigator;
   $scope.points = navigator.points;
 
-  //$scope.$watch("points", function(){
-  //  alert("1");
-  //});
-
   $scope.$on('points:updated', function(event,data) {
     // you could inspect the data to see if what you care about changed, or just update your own scope
     vm.points = navigator.points;
