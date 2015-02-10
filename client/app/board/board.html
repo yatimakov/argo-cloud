@@ -1,0 +1,138 @@
+<div ng-include="'components/headerbar/headerbar.html'"></div>
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-include="'components/menu/menu.html'"></div>
+<div id="page-container">
+
+<div id="page-content">
+  <div id="wrap">
+    <div id="page-heading">
+      <div ng-include="'components/breadcrump/breadcrump.html'"></div>
+    </div>
+
+
+    <!--<div class="spinner">-->
+    <!--<div class="cube1"></div>-->
+    <!--<div class="cube2"></div>-->
+    <!--</div>-->
+
+
+    <div class="container ">
+
+
+      <div class="row">
+        <div class="col-md-2">
+
+          <label>Select navigators</label>
+
+          <select
+            class="form-control"
+            ng-model="selectedNavigator"
+            ng-options="navigator.name for navigator in navigators">
+          </select>
+
+          <p>Description: <em>{{selectedNavigator.description}}</em></p>
+        </div>
+        <div class="col-md-2">
+          <label>Dates</label>
+
+          <p class="input-group">
+            <input type="text"
+                   class="form-control"
+                   datepicker-popup="{{format}}"
+                   ng-model="dateFrom"
+                   is-open="dateFromOpened"
+                   max-date="{{maxDate}}"
+                   datepicker-options="dateOptions"
+                   ng-required="true"
+                   close-text="Close"/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="openDateFrom($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+          </p>
+          <p class="input-group">
+
+            <input type="text"
+                   class="form-control"
+                   datepicker-popup="{{format}}"
+                   ng-model="dateTo"
+                   is-open="dateToOpened"
+                   max-date="{{maxDate}}"
+                   datepicker-options="dateOptions"
+                   ng-required="true"
+                   close-text="Close"/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="openDateTo($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+          </p>
+
+        </div>
+        <div class="col-md-1">
+          <label>From</label>
+          <timepicker
+            ng-model="timeFrom"
+            show-meridian="false">
+          </timepicker>
+        </div>
+        <div class="col-md-1">
+          <label>To</label>
+          <timepicker
+            ng-model="timeTo"
+            show-meridian="false">
+          </timepicker>
+        </div>
+
+
+        <div class="col-md-2">
+          <label>Filters</label> <br>
+          <button class="btn btn-sm btn-danger" ng-click="clearFilters()"><i class="glyphicon-remove-circle"></i> Clear
+          </button>
+          <button class="btn btn-sm btn-success" ng-click="getTrack()"><i class="glyphicon-ok-circle"></i> Apply
+          </button>
+
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="map-container" ng-switch on="created">
+            <ya-map
+              ng-switch-when="true"
+              ya-zoom="{{ zoom }}"
+              ya-after-init="afterMapInit($target)"
+              ya-controls="zoomControl typeSelector fullscreenControl">
+              <ya-geo-object ng-repeat="geoObject in geoObjects" ya-source="geoObject"></ya-geo-object>
+            </ya-map>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <hr>
+          <button class="btn btn-sm btn-primary" ng-click="moveToBeginTrack()">Move to Begin track</button>
+          <button class="btn btn-sm btn-primary" ng-click="moveToFinishTrack()">Move to Finish track</button>
+          <button class="btn btn-sm btn-primary" ng-click="created=!created">Hide/Show</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- #wrap -->
+</div>
+<!-- page-content -->
+
+
+  <div ng-include="'components/footer/footer.html'"></div>
+
+
+</div> <!-- page-container -->
+
+
+
+
+
